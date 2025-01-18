@@ -171,6 +171,13 @@ if (isset($_GET['id'])) {
             </li>
 
             <li class="nav-item">
+                <a class="nav-link collapsed" href="galeri.php">
+                    <i class="bi bi-image"></i>
+                    <span>Galeri</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="pages-blank.html">
                     <i class="bi bi-box-arrow-in-right"></i>
                     <span>Logout</span></a>
@@ -205,19 +212,19 @@ if (isset($_GET['id'])) {
                                     </div>
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Nama</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama Anda" value="<?php echo $row['name'];?>" required>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama Anda" value="<?php echo $row['name']; ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email Anda" value="<?php echo $row['email'];?>" required>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email Anda" value="<?php echo $row['email']; ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username</label>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username Anda" value="<?php echo $row['username'];?>" required>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan username Anda" value="<?php echo $row['username']; ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="password" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password Anda" value="<?php echo $row['password'];?>" required>
+                                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password Anda" value="<?php echo $row['password']; ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-primary w-100">Submit</button>

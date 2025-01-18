@@ -46,7 +46,7 @@
         <div class="d-flex align-items-center justify-content-between">
             <a href="index.html" class="logo d-flex align-items-center">
                 <img src="assets/img/logo.png" alt="">
-                <span class="d-none d-lg-block">NiceAdmin</span>
+                <span class="d-none d-lg-block">Bepuli</span>
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -140,6 +140,13 @@
                 <a class="nav-link collapsed" href="artikel.php">
                     <i class="bi bi-person"></i>
                     <span>Tabel Artikel</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="galeri.php">
+                    <i class="bi bi-image"></i>
+                    <span>Galeri</span>
                 </a>
             </li>
 

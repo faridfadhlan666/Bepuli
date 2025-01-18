@@ -1,3 +1,31 @@
+<?php
+include('koneksi.php');
+
+// Cek apakah id_artikel ada di URL
+if (isset($_GET['id_artikel']) && !empty($_GET['id_artikel'])) {
+    $id_artikel = $_GET['id_artikel'];
+
+    // Query untuk mengambil data artikel berdasarkan id_artikel
+    $query = "SELECT * FROM artikel WHERE id_artikel = ?";
+    $stmt = $koneksi->prepare($query);
+    $stmt->bind_param('i', $id_artikel);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Pastikan ada hasil query
+    if ($result->num_rows > 0) {
+        // Ambil data artikel
+        $row = $result->fetch_assoc();
+    } else {
+        echo "<script>alert('Artikel tidak ditemukan.'); window.location.href='galeri.php';</script>";
+        exit;
+    }
+} else {
+    echo "<script>alert('ID artikel tidak ditemukan.'); window.location.href='galeri.php';</script>";
+    exit;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -136,7 +164,7 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item collapsed">
                 <a class="nav-link" href="artikel.php">
                     <i class="bi bi-person"></i>
                     <span>Tabel Artikel</span>
@@ -164,11 +192,11 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Tambah Artikel</h1>
+            <h1>Tambah Galeri</h1>
             <nav>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                    <li class="breadcrumb-item active">Tambah Artikel</li>
+                    <li class="breadcrumb-item active">Tambah Galeri</li>
                 </ol>
             </nav>
         </div><!-- End Page Title -->
@@ -179,31 +207,13 @@
                     <div class="col-12 col-md-12 col-lg-10">
                         <div class="card shadow-sm">
                             <div class="card-body">
-                                <h5 class="card-title text-center mb-4">Tambah Artikel</h5>
-                                <form action="proses-tambah-artikel.php" method="POST" enctype="multipart/form-data">
-                                    <div class="mb-3">
-                                        <label for="judul" class="form-label">Judul</label>
-                                        <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan judul artikel" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="penulis" class="form-label">Penulis</label>
-                                        <input type="text" class="form-control" id="penulis" name="penulis" placeholder="Masukkan penulis artikel" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="sumber" class="form-label">Sumber</label>
-                                        <input type="text" class="form-control" id="sumber" name="sumber" placeholder="Masukkan sumber artikel" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="deskripsi" class="form-label">Deskripsi</label>
-                                        <textarea class="form-control" style="height: 100px" id="deskripsi" name="deskripsi" placeholder="Masukkan deskripsi artikel" required></textarea>
-                                    </div>
+                                <h5 class="card-title text-center mb-4">Tambah Galeri</h5>
+                                <form action="proses-edit-galeri.php" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="id_artikel" value="<?php echo isset($row['id_artikel']) ? htmlspecialchars($row['id_artikel']) : ''; ?>">
                                     <div class="mb-3">
                                         <label for="gambar" class="form-label">Gambar</label>
-                                        <input type="file" class="form-control" id="gambar" name="gambar" placeholder="Masukkan gambar artikel" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="tanggal" class="form-label">Tanggal</label>
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Masukkan tanggal artikel" required>
+                                        <p>Gambar saat ini: <img src="assets/img/<?php echo isset($row['gambar']) ? htmlspecialchars($row['gambar']) : ''; ?>" alt="Gambar Lama" style="max-height: 100px;"></p>
+                                        <input type="file" class="form-control" id="gambar" name="gambar" accept=".jpg,.jpeg,.png">
                                     </div>
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-primary w-100">Tambahkan</button>

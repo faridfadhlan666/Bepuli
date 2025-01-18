@@ -160,6 +160,13 @@ if (!isset($_SESSION['username'])) {
             </li>
 
             <li class="nav-item">
+                <a class="nav-link collapsed" href="galeri.php">
+                    <i class="bi bi-image"></i>
+                    <span>Galeri</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="pages-blank.html">
                     <i class="bi bi-box-arrow-in-right"></i>
                     <span>Logout</span></a>
@@ -182,10 +189,16 @@ if (!isset($_SESSION['username'])) {
             </nav>
         </div><!-- End Page Title -->
 
-        <a href="tambah-artikel.php" type="button" class="btn btn-primary btn-md mb-3"><i class="bi bi-plus-circle"></i> Tambah Artikel</a>
+        <!-- Link untuk menambah artikel baru -->
+        <a href="tambah-artikel.php" type="button" class="btn btn-primary btn-md mb-3">
+            <i class="bi bi-plus-circle"></i> Tambah Artikel
+        </a>
+
+        <!-- Tabel untuk menampilkan data artikel -->
         <table class="table table-bordered">
             <thead>
                 <tr>
+                    <!-- Header kolom pada tabel -->
                     <th scope="col">No</th>
                     <th scope="col">Judul</th>
                     <th scope="col">Penulis</th>
@@ -198,34 +211,76 @@ if (!isset($_SESSION['username'])) {
             </thead>
             <tbody>
                 <?php
+                // Query untuk mengambil semua data dari tabel "artikel" dan mengurutkannya berdasarkan id_artikel secara descending
                 $query = mysqli_query($koneksi, "SELECT * FROM artikel order by id_artikel desc");
+
+                // Variabel untuk menampilkan nomor urut
                 $no = 1;
+
+                // Perulangan untuk menampilkan data artikel
                 while ($data = mysqli_fetch_array($query)) {
                 ?>
                     <tr>
+                        <!-- Menampilkan nomor urut -->
                         <td><?= $no++ ?></td>
+
+                        <!-- Menampilkan judul artikel, hanya 30 karakter pertama diikuti oleh '...' -->
                         <td><?= substr($data['judul'], 0, 30) ?> . . .</td>
+
+                        <!-- Menampilkan nama penulis artikel -->
                         <td><?= $data['penulis']; ?></td>
+
+                        <!-- Menampilkan sumber artikel, hanya 20 karakter pertama diikuti oleh '...' -->
                         <td><?= substr($data['sumber'], 0, 20) ?>. . .</td>
+
+                        <!-- Menampilkan deskripsi artikel, hanya 30 karakter pertama diikuti oleh '...' -->
                         <td><?= substr($data['deskripsi'], 0, 30) ?> . . .</td>
-                        <td><img src="assets/img/<?= $data['gambar'] ?>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 2px;" alt="Gambar Artikel" /></td>
+
+                        <!-- Menampilkan gambar artikel -->
+                        <td>
+                            <img src="assets/img/<?= $data['gambar'] ?>"
+                                style="width: 80px; height: 80px; object-fit: cover; border-radius: 2px;"
+                                alt="Gambar Artikel" />
+                        </td>
+
+                        <!-- Menampilkan tanggal artikel -->
                         <td><?= $data['tanggal'] ?></td>
-                        <td><a href="edit-artikel.php?id_artikel=<?= $data['id_artikel'] ?>" type="button" class="btn btn-warning btn-md"><i class="bi bi-pencil-square"></i> Edit</a>
-                            <a href="delete-artikel.php?id_artikel=<?= $data['id_artikel'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus data artikel ini?')" type="button" class="btn btn-danger btn-md"><i class="bi bi-trash"></i> Hapus</a>
+
+                        <!-- Tombol aksi: Edit, Delete, dan View -->
+                        <td>
+                            <!-- Link untuk mengedit artikel -->
+                            <a href="edit-artikel.php?id_artikel=<?= $data['id_artikel'] ?>"
+                                type="button" class="btn btn-warning btn-md">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+
+                            <!-- Link untuk menghapus artikel, dengan konfirmasi sebelum menghapus -->
+                            <a href="delete-artikel.php?id_artikel=<?= $data['id_artikel'] ?>"
+                                onclick="return confirm('Anda Yakin Ingin Menghapus data artikel ini?')"
+                                type="button" class="btn btn-danger btn-md">
+                                <i class="bi bi-trash"></i>
+                            </a>
+
+                            <!-- Link untuk melihat detail artikel -->
+                            <a href="view-artikel.php?id_artikel=<?= $data['id_artikel'] ?>"
+                                type="button" class="btn btn-info btn-md">
+                                <i class="bi bi-eye"></i>
+                            </a>
                         </td>
                     </tr>
                 <?php
-                }
+                } // Akhir perulangan while
                 ?>
             </tbody>
         </table>
+
 
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+            &copy; Copyright <strong><span>Farid Fadhlan</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
             <!-- All the links in the footer should remain intact. -->

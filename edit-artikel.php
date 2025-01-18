@@ -171,6 +171,13 @@ if (isset($_GET['id_artikel']) && !empty($_GET['id_artikel'])) {
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="galeri.php">
+                    <i class="bi bi-image"></i>
+                    <span>Galeri</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="artikel.php">
                     <i class="bi bi-box-arrow-in-right"></i>
                     <span>Logout</span>
@@ -200,33 +207,67 @@ if (isset($_GET['id_artikel']) && !empty($_GET['id_artikel'])) {
                         <div class="card shadow-sm">
                             <div class="card-body">
                                 <h5 class="card-title text-center mb-4">Edit Artikel</h5>
+                                <!-- Form untuk mengedit artikel -->
                                 <form action="proses-edit-artikel.php" method="POST" enctype="multipart/form-data">
+                                    <!-- Input hidden untuk menyimpan id artikel (tidak terlihat oleh pengguna) -->
                                     <input type="hidden" name="id_artikel" value="<?php echo isset($row['id_artikel']) ? htmlspecialchars($row['id_artikel']) : ''; ?>">
+
+                                    <!-- Input untuk judul artikel -->
                                     <div class="mb-3">
                                         <label for="judul" class="form-label">Judul</label>
-                                        <input type="text" class="form-control" id="judul" name="judul" placeholder="Masukkan judul artikel" value="<?php echo isset($row['judul']) ? htmlspecialchars($row['judul']) : ''; ?>" required>
+                                        <input type="text" class="form-control" id="judul" name="judul"
+                                            placeholder="Masukkan judul artikel"
+                                            value="<?php echo isset($row['judul']) ? htmlspecialchars($row['judul']) : ''; ?>"
+                                            required>
                                     </div>
+
+                                    <!-- Input untuk nama penulis artikel -->
                                     <div class="mb-3">
                                         <label for="penulis" class="form-label">Penulis</label>
-                                        <input type="text" class="form-control" id="penulis" name="penulis" placeholder="Masukkan penulis artikel" value="<?php echo isset($row['penulis']) ? htmlspecialchars($row['penulis']) : ''; ?>" required>
+                                        <input type="text" class="form-control" id="penulis" name="penulis"
+                                            placeholder="Masukkan penulis artikel"
+                                            value="<?php echo isset($row['penulis']) ? htmlspecialchars($row['penulis']) : ''; ?>"
+                                            required>
                                     </div>
+
+                                    <!-- Input untuk sumber artikel -->
                                     <div class="mb-3">
                                         <label for="sumber" class="form-label">Sumber</label>
-                                        <input type="text" class="form-control" id="sumber" name="sumber" placeholder="Masukkan sumber artikel" value="<?php echo isset($row['sumber']) ? htmlspecialchars($row['sumber']) : ''; ?>" required>
+                                        <input type="text" class="form-control" id="sumber" name="sumber"
+                                            placeholder="Masukkan sumber artikel"
+                                            value="<?php echo isset($row['sumber']) ? htmlspecialchars($row['sumber']) : ''; ?>"
+                                            required>
                                     </div>
+
+                                    <!-- Input untuk deskripsi artikel -->
                                     <div class="mb-3">
                                         <label for="deskripsi" class="form-label">Deskripsi</label>
-                                        <textarea class="form-control" style="height: 100px" id="deskripsi" name="deskripsi" placeholder="Masukkan deskripsi artikel" required><?php echo isset($row['deskripsi']) ? htmlspecialchars($row['deskripsi']) : ''; ?></textarea>
+                                        <textarea class="form-control" style="height: 100px" id="deskripsi" name="deskripsi"
+                                            placeholder="Masukkan deskripsi artikel" required><?php echo isset($row['deskripsi']) ? htmlspecialchars($row['deskripsi']) : ''; ?></textarea>
                                     </div>
+
+                                    <!-- Input untuk mengganti gambar artikel -->
                                     <div class="mb-3">
                                         <label for="gambar" class="form-label">Gambar</label>
-                                        <p>Gambar saat ini: <img src="assets/img/<?php echo isset($row['gambar']) ? htmlspecialchars($row['gambar']) : ''; ?>" alt="Gambar Lama" style="max-height: 100px;"></p>
+                                        <!-- Menampilkan gambar yang sedang digunakan -->
+                                        <p>Gambar saat ini:
+                                            <img src="assets/img/<?php echo isset($row['gambar']) ? htmlspecialchars($row['gambar']) : ''; ?>"
+                                                alt="Gambar Lama" style="max-height: 100px;">
+                                        </p>
+                                        <!-- Input file untuk upload gambar baru -->
                                         <input type="file" class="form-control" id="gambar" name="gambar" accept=".jpg,.jpeg,.png">
                                     </div>
+
+                                    <!-- Input untuk tanggal artikel -->
                                     <div class="mb-3">
                                         <label for="tanggal" class="form-label">Tanggal</label>
-                                        <input type="date" class="form-control" id="tanggal" name="tanggal" placeholder="Masukkan tanggal artikel" value="<?php echo isset($row['tanggal']) ? htmlspecialchars($row['tanggal']) : ''; ?>" required>
+                                        <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                            placeholder="Masukkan tanggal artikel"
+                                            value="<?php echo isset($row['tanggal']) ? htmlspecialchars($row['tanggal']) : ''; ?>"
+                                            required>
                                     </div>
+
+                                    <!-- Tombol untuk submit form -->
                                     <div class="mb-3">
                                         <button type="submit" class="btn btn-primary w-100">Ubah</button>
                                     </div>

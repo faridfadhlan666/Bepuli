@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Halaman Tabel Admin</title>
+  <title>Halaman Tabel Galeri</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -146,7 +146,7 @@ if (!isset($_SESSION['username'])) {
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link" href="admin.php">
+        <a class="nav-link collapsed" href="admin.php">
           <i class="bi bi-person"></i>
           <span>Tabel Admin</span>
         </a>
@@ -160,7 +160,7 @@ if (!isset($_SESSION['username'])) {
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="galeri.php">
+        <a class="nav-link" href="galeri.php">
           <i class="bi bi-image"></i>
           <span>Galeri</span>
         </a>
@@ -181,42 +181,37 @@ if (!isset($_SESSION['username'])) {
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Tabel Admin</h1>
+      <h1>Galeri</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Tabel Admin</li>
+          <li class="breadcrumb-item active">Galeri</li>
         </ol>
       </nav>
     </div><!-- End Page Title -->
 
-    <a href="tambah-admin.php" type="button" class="btn btn-primary btn-md mb-3"><i class="bi bi-plus-circle"></i> Tambah Admin</a>
+    <a href="tambah-galeri.php" type="button" class="btn btn-primary btn-md mb-3"><i class="bi bi-plus-circle"></i> Tambah Galeri</a>
     <table class="table table-bordered">
       <thead>
         <tr>
           <th scope="col">No</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Username</th>
-          <th scope="col">Password</th>
+          <th scope="col">Gambar</th>
           <th scope="col">Aksi</th>
         </tr>
       </thead>
       <tbody>
         <?php
-        $query = mysqli_query($koneksi, "SELECT * FROM admin");
+        $query = mysqli_query($koneksi, "SELECT * FROM artikel order by id_artikel desc");
         $no = 1;
         while ($data = mysqli_fetch_array($query)) {
         ?>
           <tr>
             <td><?= $no++ ?></td>
-            <td><?= $data['name'] ?></td>
-            <td><?= $data['email'] ?></td>
-            <td><?= $data['username'] ?></td>
-            <td><?= $data['password'] ?></td>
+            <td><img src="assets/img/<?= $data['gambar'] ?>" style="width: 180px; height: 180px; object-fit: cover; border-radius: 2px;" alt="Gambar Artikel" /></td>
             <td>
-              <a href="edit-admin.php?id=<?= $data['id'] ?>" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Edit</a>
-              <a href="delete-admin.php?id=<?= $data['id'] ?>" class="btn btn-danger"><i class="bi bi-trash"></i> Hapus</a>
+              <a href="edit-galeri.php?id_artikel=<?= $data['id_artikel'] ?>" type="button" class="btn btn-warning btn-md"><i class="bi bi-pencil-square"></i> Edit</a>
+              <a href="delete-galeri.php?id_artikel=<?= $data['id_artikel'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus data artikel ini?')" type="button" class="btn btn-danger btn-md"><i class="bi bi-trash"></i> Hapus</a>
+              <a href="view-galeri.php?id_artikel=<?= $data['id_artikel'] ?>" type="button" class="btn btn-info btn-md"><i class="bi bi-eye"></i> View</a>
             </td>
           </tr>
         <?php
